@@ -9,4 +9,6 @@ Installed using Operator
 
 ## Harbor
 
-Will install
+Will install now.
+Let's see what values fit.
+
