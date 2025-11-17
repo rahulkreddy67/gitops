@@ -1,0 +1,31 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: keycloak
+  namespace: argocd
+spec:
+  project: configuration
+  source:
+    repoURL: https://github.com/bitnami/charts.git
+    path: charts/bitnami/keycloak
+    targetRevision: 25.3.0
+    helm:
+      values: |-
+        replicaCount: 1
+        auth:
+          adminUser: admin
+          adminPassword: changeMe123!
+        service:
+          type: ClusterIP
+        persistence:
+          enabled: true
+          size: 8Gi
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: keycloak
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
