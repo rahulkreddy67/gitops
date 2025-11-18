@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: https://github.com/bitnami/charts.git
     path: charts/bitnami/keycloak
-    targetRevision: 25.3.0
+    targetRevision: keycloak/25.3.0
     helm:
       values: |-
         replicaCount: 1
