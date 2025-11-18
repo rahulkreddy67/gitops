@@ -6,7 +6,7 @@ metadata:
 spec:
   project: configuration
   sources:
-    - repoURL: https://github.com/rahulkreddy67/gitops.git
+    - repoURL: git@github.com:rahulkreddy67/gitops.git
       path: lab19/keycloak
       targetRevision: HEAD
       directory:
