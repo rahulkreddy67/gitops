@@ -7,7 +7,7 @@ spec:
   project: configuration
   source:
     repoURL: https://github.com/bitnami/charts.git
-    path: charts/bitnami/keycloak
+    path: bitnami/keycloak
     targetRevision: keycloak/25.3.0
     helm:
       values: |-
