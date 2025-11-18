@@ -5,27 +5,27 @@ metadata:
   namespace: openshift-gitops-operator
 spec:
   project: configuration
-  source:
-  - repoURL: https://github.com/rahulkreddy67/gitops.git
-    path: lab19/keycloak
-    targetRevision: HEAD
-    directory:
-      recurse: true
+  sources:
+    - repoURL: https://github.com/rahulkreddy67/gitops.git
+      path: lab19/keycloak
+      targetRevision: HEAD
+      directory:
+        recurse: true
 
-  - repoURL: https://github.com/bitnami/charts.git
-    path: bitnami/keycloak
-    targetRevision: keycloak/25.3.0
-    helm:
-      values: |-
-        replicaCount: 1
-        auth:
-          adminUser: admin
-          adminPassword: changeMe123!
-        service:
-          type: ClusterIP
-        persistence:
-          enabled: true
-          size: 8Gi
+    - repoURL: https://github.com/bitnami/charts.git
+      path: bitnami/keycloak
+      targetRevision: keycloak/25.3.0
+      helm:
+        values: |-
+          replicaCount: 1
+          auth:
+            adminUser: admin
+            adminPassword: changeMe123!
+          service:
+            type: ClusterIP
+          persistence:
+            enabled: true
+            size: 8Gi
   destination:
     server: https://kubernetes.default.svc
     namespace: keycloak
