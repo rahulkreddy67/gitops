@@ -4,3 +4,4 @@ metadata:
   name: keycloak
   labels:
     argocd.argoproj.io/managed-by: keycloak
+    argocd.argoproj.io/sync-wave: "0"
