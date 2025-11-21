@@ -1,0 +1,44 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: postgres-operator
+  namespace: openshift-gitops
+spec:
+  project: configuration
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+      - ServerSideApply=true
+  sources:
+  - chart: postgres-operator
+    repoURL: https://opensource.zalando.com/postgres-operator/charts/postgres-operator
+    targetRevision: 1.14.0
+    helm:
+      values: |
+        configGeneral:
+          kubernetes_use_configmaps: true
+        configLogicalBackup:
+          logical_backup_docker_image: ghcr.io/zalando/postgres-operator/logical-backup:v1.14.0
+        configKubernetes:
+          spilo_allow_privilege_escalation: false
+          enable_owner_references: true
+          enable_pod_antiaffinity: true
+        securityContext:
+          allowPrivilegeEscalation: false
+          runAsUser: null
+        rbac:
+          # Specifies whether RBAC resources should be created
+          create: true
+          # Specifies whether ClusterRoles that are aggregated into the K8s default roles should be created. (https://kubernetes.io/docs/reference/access-authn-authz/rbac/#default-roles-and-role-bindings)
+          createAggregateClusterRoles: true                  
+  - chart: postgres-operator-ui
+    repoURL: https://opensource.zalando.com/postgres-operator/charts/postgres-operator-ui
+    targetRevision: 1.14.0
+    helm:
+      values: |
+        # configure UI service        
+
+
+  destination:
+    server: "https://kubernetes.default.svc"
+    namespace: zalando-operator
